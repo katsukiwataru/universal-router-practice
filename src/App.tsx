@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import { createHashHistory } from 'history';
+import { Router } from './router';
+
 import './App.css';
+
+const history = createHashHistory();
+
+export const routes = [
+  {
+    path: '/',
+    action: () => import('./pages/main'),
+  },
+  {
+    path: '/about',
+    action: () => import('./pages/about'),
+  },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history} routes={routes} fallback={<div>Loading...</div>} />
   );
 }
 
